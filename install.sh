@@ -41,14 +41,22 @@ nala install -y kde-plasma-desktop
 # Linked Resources - N/A
 nala install -y apt-transport-https
 nala install -y ca-certificates
-nala install -y cockpit
-nala install -y cockpit-machines
 nala install -y curl
+nala isntall -y flameshot
 nala install -y gnupg
 nala install -y lsb-release
 nala install -y ufw
 nala install -y unzip
 nala install -y zram-tools
+
+Possible requirement for Cockpit and Cockpit Machines
+nala install -y cockpit
+nala install -y cockpit-machines
+#nala install -y libvirtd
+
+#Start services for Cockpit (and Cockpit machines)
+systemctl start libvirtd
+systemctl start Cockpit
 
 # Section - 07
 # Purpose - Installing tools & popular programs
