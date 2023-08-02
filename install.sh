@@ -41,6 +41,8 @@ nala install -y kde-plasma-desktop
 # Linked Resources - N/A
 nala install -y apt-transport-https
 nala install -y ca-certificates
+nala install -y cockpit
+nala install -y cockpit-machines
 nala install -y curl
 nala install -y gnupg
 nala install -y lsb-release
@@ -160,21 +162,21 @@ cp ./temp /usr/share/applications/thunderbird.desktop;rm ./temp
 # Section - 14
 # Purpose - Install QEMU/KVM
 # link: https://christitus.com/vm-setup-in-linux/
-nala install -y qemu-kvm 
-nala install -y qemu-system
-nala install -y qemu-utils
-nala install -y python3
-nala install -y python3-pip
-nala install -y libvirt-clients
-nala install -y libvirt-daemon-system
-nala install -y bridge-utils 
-nala install -y virtinst
-nala install -y libvirt-daemon
-nala install -y virt-manager
+#nala install -y qemu-kvm 
+#nala install -y qemu-system
+#nala install -y qemu-utils
+#nala install -y python3
+#nala install -y python3-pip
+#nala install -y libvirt-clients
+#nala install -y libvirt-daemon-system
+#nala install -y bridge-utils 
+#nala install -y virtinst
+#nala install -y libvirt-daemon
+#nala install -y virt-manager
 
-systemctl enable --now libvirtd
-virsh net-start default
-virsh net-autostart default
+#systemctl enable --now libvirtd
+#virsh net-start default
+#virsh net-autostart default
 
 
 #########################################
