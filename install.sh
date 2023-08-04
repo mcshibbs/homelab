@@ -30,6 +30,7 @@ nala install -y curl
 nala isntall -y flameshot
 nala install -y gnupg
 nala install -y lsb-release
+nala install -y nextcloud-desktop
 nala install -y ufw
 nala install -y unzip
 nala install -y zram-tools
@@ -162,7 +163,6 @@ cp ./temp /usr/share/applications/thunderbird.desktop;rm ./temp
 # Putpose - This section is to track processes that need to be added. 
 #
 # 2 - Misc App Wish List
-# nextcloud - https://github.com/nextcloud/desktop
 # nextdns
 # torguard
 # wireguard
