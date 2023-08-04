@@ -33,6 +33,7 @@ nala install -y lsb-release
 nala install -y nextcloud-desktop
 nala install -y ufw
 nala install -y unzip
+nala install -y wireguard
 nala install -y zram-tools
 
 #Possible requirement for Cockpit and Cockpit Machines
