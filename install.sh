@@ -156,6 +156,28 @@ cp ./temp /usr/share/applications/thunderbird.desktop;rm ./temp
 sudo wget  https://updates.torguard.biz/Software/Linux/torguard-latest-amd64.deb
 dpkg -i torguard-latest.amd64.deb
 
+# Section - 16 | Purpose - Install docker and run Portainer container | Linked resources -
+### Add Dockers official GPG key:
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+### Use the following command to set up the repository:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+### Update apt (nala):
+nala update 
+### To install the latest version, run:
+nala install -y docker-ce
+nala install -y docker-ce-cli
+nala install -y containerd.io
+nala install -y docker-buildx-plugin
+nala install -y docker-compose-plugin
+### Run Portainer container:
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+
+
 # Section - 15 | Purpose - Install QEMU/KVM | Linked Resources: https://christitus.com/vm-setup-in-linux/
 #
 #nala install -y qemu-kvm 
@@ -193,21 +215,3 @@ dpkg -i torguard-latest.amd64.deb
 # -profile <your profile id> \
 # -report-client-info \
 # -auto-activate
-#
-## Docker
-# Add Docker’s official GPG key:
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-# Use the following command to set up the repository:
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-# Update apt (nala):
-nala update 
-# To install the latest version, run:
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-#########################################
-########## SECTION 99  - END   ##########
-#########################################
