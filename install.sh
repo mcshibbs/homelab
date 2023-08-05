@@ -29,6 +29,7 @@ nala install -y ca-certificates
 nala install -y curl
 nala isntall -y flameshot
 nala install -y gnupg
+nala install -y keepassxc
 nala install -y lsb-release
 nala install -y nextcloud-desktop
 nala install -y ufw
@@ -192,7 +193,21 @@ dpkg -i torguard-latest.amd64.deb
 # -profile <your profile id> \
 # -report-client-info \
 # -auto-activate
-
+#
+## Docker
+# Add Docker’s official GPG key:
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+# Use the following command to set up the repository:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# Update apt (nala):
+nala update 
+# To install the latest version, run:
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 #########################################
 ########## SECTION 99  - END   ##########
 #########################################
