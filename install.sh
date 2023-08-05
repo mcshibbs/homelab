@@ -206,7 +206,7 @@ docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /va
 # 1 - Correct method for performing Joplin install to us any account and not just sean
 # 2 - Include configuration options for NextDNS
 # 3 - Include anymore Brave extensions (ad blocker)
-# 4 - 
+# 4 - Apply favorite wallpaper - https://store.kde.org/p/1370727
 #
 #
 #
