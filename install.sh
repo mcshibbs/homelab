@@ -94,7 +94,11 @@ wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.g
 echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
     | sudo tee /etc/apt/sources.list.d/vscodium.list
 
-# Section - 11 | Purpose - Update repo mirrors & install Brave, LibreWolf and VSCodium | Linked Resources - 
+# Section - 11 | Purpose - Apply repo mirrors and dependencies for NextDNS
+sudo wget -qO /usr/share/keyrings/nextdns.gpg https://repo.nextdns.io/nextdns.gpg
+echo "deb [signed-by=/usr/share/keyrings/nextdns.gpg] https://repo.nextdns.io/deb stable main" | sudo tee /etc/apt/sources.list.d/nextdns.list
+
+# Section - 12 | Purpose - Update repo mirrors & install Brave, LibreWolf and VSCodium | Linked Resources - 
 ## Update repo mirrors
 nala fetch --auto -y 
 nala update 
@@ -103,19 +107,20 @@ nala upgrade -y
 nala install -y brave-browser
 nala install -y librewolf
 nala install -y codium
+nala install -y nextdns
 
-# Section - 12 | Purpose - Add Bitwarden Extension to Brave | # Linked Resources
+# Section - 13 | Purpose - Add Bitwarden Extension to Brave | # Linked Resources
 BITWARDEN_ID=nngceckbapebfimnlniiiahkandclblb
 EXTENSIONS_PATH=/opt/brave.com/brave/extensions
 mkdir -p $EXTENSIONS_PATH
 echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' > "${EXTENSIONS_PATH}/${BITWARDEN_ID}.json"
 
-# Section - 13 | Purpose - Install Joplin | Linked Resources - https://joplinapp.org/help/#desktop-applications
+# Section - 14 | Purpose - Install Joplin | Linked Resources - https://joplinapp.org/help/#desktop-applications
 #
 # Download and run bash script to install Joplin
 su sean -c "wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash"
 
-# Section - 14 | Purpose - Install Thunderbird | # Linked Resources - 
+# Section - 15 | Purpose - Install Thunderbird | Linked Resources - 
 #
 # This should work if thunderbird updates to the most current version
 wget -O thunderbird.tar.bz2 "https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US"
@@ -137,6 +142,10 @@ Terminal=false
 StartupNotify=false
 EOF
 cp ./temp /usr/share/applications/thunderbird.desktop;rm ./temp
+
+# Section - 15 | Purpose - Install Torguard | Linked Resources - 
+sudo wget  https://updates.torguard.biz/Software/Linux/torguard-latest-amd64.deb
+dpkg -i torguard-latest.amd64.deb
 
 # Section - 15 | Purpose - Install QEMU/KVM | Linked Resources: https://christitus.com/vm-setup-in-linux/
 #
@@ -163,11 +172,19 @@ cp ./temp /usr/share/applications/thunderbird.desktop;rm ./temp
 #
 # Putpose - This section is to track processes that need to be added. 
 #
-# 2 - Misc App Wish List
-# nextdns
-# torguard
-# wireguard
+# 1 - Correct method for performing Joplin install to us any account and not just sean
+# 2 - Include configuration options for NextDNS
+# 3 - Include anymore Brave extensions (ad blocker)
+# 4 - 
 #
+#
+#
+# NextDNS Configuration commands
+# sudo nextdns install \
+# -profile <your profile id> \
+# -report-client-info \
+# -auto-activate
+
 #########################################
 ########## SECTION 99  - END   ##########
 #########################################
